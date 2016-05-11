@@ -1,5 +1,5 @@
 class HypothesisLine
-  attr_reader :theta0
+  attr_reader :theta0,
               :theta1
 
   def initialize(theta0, theta1)
