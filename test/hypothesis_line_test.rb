@@ -10,4 +10,9 @@ class HypothesisLineTest < Minitest::Test
     assert_equal 0.4, hp.theta1
   end
 
+  def test_it_generates_a_line
+    hp = HypothesisLine.new(0.5, 0.4)
+    assert_equal 1.5, hp.line(2.5)
+  end
+
 end
