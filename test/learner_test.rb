@@ -16,17 +16,9 @@ class LearnerTest < Minitest::Test
 
   def test_it_returns_0_cost_with_linear_data
     training_set = [{i: 0, o: 0}, {i: 1, o: 1}]
-
-    # y - 0 = 1 (x - 0) ... y = x
-    # m = 1
-    #
-    # y - y_0 = m (x - x_0)
-    # m = (y_1 - y_0)/(x_1 - x_0)
-
     hypothesis = HypothesisLine.new(0, 1)
     learner = Learner.new(0, training_set)
     assert_equal 0, learner.cost(hypothesis)
-
   end
 
 end
