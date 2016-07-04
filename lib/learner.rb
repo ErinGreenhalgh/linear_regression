@@ -12,7 +12,6 @@ class Learner
     rand(-1..1)
   end
 
-
   def cost(hypothesis)
     training_set.reduce(0) do |acc, ex|
       acc + (hypothesis.line(ex[:i]) - ex[:o])**2
@@ -29,18 +28,21 @@ class Learner
 
   def update_theta1(hypothesis)
     summation = training_set.reduce(0) do |acc, ex|
-      acc + (hypothesis.line(ex[:i]) - ex[:o])*ex[:i]
-    end/(training_set.count.to_f)
+      acc + (hypothesis.line(ex[:i]) - ex[:o])*ex[:i] #square root of ex[:i]
+     end/(training_set.count.to_f)
 
     hypothesis.theta1 - learning_rate * summation
   end
 
   def decrease_cost(hypothesis)
-    loop do
-      cost(hypothesis)
+    new_theta0 = 0
+    new_theta1 = 0
+    10000.times do
+      p cost(hypothesis)
       new_theta0 = update_theta0(hypothesis)
       new_theta1 = update_theta1(hypothesis)
       hypothesis = HypothesisLine.new(new_theta0, new_theta1)
     end
+    p "#{new_theta0}, #{new_theta1}"
   end
 end

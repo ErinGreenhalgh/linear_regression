@@ -9,6 +9,11 @@ class HypothesisLine
 
   def line(x)
     theta0 + (theta1 * x)
+
   end
+
+  # def square_root(x)
+  #   theta0 + theta1*(Math.sqrt(x))
+  # end
 
 end
