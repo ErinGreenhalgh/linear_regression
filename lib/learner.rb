@@ -1,4 +1,4 @@
-require './lib/hypothesis_line'
+require './lib/hypothesis'
 
 class Learner
   attr_reader :learning_rate, :training_set
@@ -14,21 +14,21 @@ class Learner
 
   def cost(hypothesis)
     training_set.reduce(0) do |acc, ex|
-      acc + (hypothesis.line(ex[:i]) - ex[:o])**2
+      acc + (hypothesis.function(ex[:i]) - ex[:o])**2
     end/(2*training_set.count.to_f)
   end
 
   def update_theta0(hypothesis)
     summation = training_set.reduce(0) do |acc, ex|
-      acc + (hypothesis.line(ex[:i]) - ex[:o])
-    end/(training_set.count.to_f)
+      acc + (hypothesis.function(ex[:i]) - ex[:o])
+    end / (training_set.count.to_f)
 
     hypothesis.theta0 - learning_rate * summation
   end
 
   def update_theta1(hypothesis)
     summation = training_set.reduce(0) do |acc, ex|
-      acc + (hypothesis.line(ex[:i]) - ex[:o]) * Math.sqrt(ex[:i])
+      acc + (hypothesis.function(ex[:i]) - ex[:o]) * Math.sqrt(ex[:i])
      end/(training_set.count.to_f)
 
     hypothesis.theta1 - learning_rate * summation
@@ -38,11 +38,11 @@ class Learner
     new_theta0 = 0
     new_theta1 = 0
     10000.times do
-      p cost(hypothesis)
+      cost(hypothesis)
       new_theta0 = update_theta0(hypothesis)
       new_theta1 = update_theta1(hypothesis)
-      hypothesis = HypothesisLine.new(new_theta0, new_theta1)
+      hypothesis = Hypothesis.new(new_theta0, new_theta1)
     end
-    p "#{new_theta0}, #{new_theta1}"
+    [new_theta0, new_theta1]
   end
 end
