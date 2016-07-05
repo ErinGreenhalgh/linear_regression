@@ -28,7 +28,7 @@ class Learner
 
   def update_theta1(hypothesis)
     summation = training_set.reduce(0) do |acc, ex|
-      acc + (hypothesis.line(ex[:i]) - ex[:o])*ex[:i] #square root of ex[:i]
+      acc + (hypothesis.line(ex[:i]) - ex[:o]) * Math.sqrt(ex[:i])
      end/(training_set.count.to_f)
 
     hypothesis.theta1 - learning_rate * summation

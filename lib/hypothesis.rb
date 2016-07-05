@@ -1,4 +1,4 @@
-class HypothesisLine
+class Hypothesis
   attr_reader :theta0,
               :theta1
 
@@ -7,13 +7,8 @@ class HypothesisLine
     @theta1= theta1
   end
 
-  def line(x)
-    theta0 + (theta1 * x)
-
+  def function(x)
+    theta0 + theta1*(Math.sqrt(x))
   end
-
-  # def square_root(x)
-  #   theta0 + theta1*(Math.sqrt(x))
-  # end
 
 end

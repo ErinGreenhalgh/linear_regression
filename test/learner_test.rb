@@ -1,6 +1,6 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-require './lib/hypothesis_line'
+require './lib/hypothesis'
 require './lib/learner'
 
 class LearnerTest < Minitest::Test
